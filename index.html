@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, follow">
+    <title>แสดงการเปรียบเทียบ BioCNG (ก๊าซ CBG) กับเชื้อเพลิงฟอสซิล</title>
+
+    <style>
+
+    </style>
+
+
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="th">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>การเปรียบเทียบ BioCNG (ก๊าซ CBG) กับเชื้อเพลิงฟอสซิล</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+        <style>
+            /* Global Styles */
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Container Styling */
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            /* Card Design */
+            .card {
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                margin-bottom: 30px;
+            }
+
+            .card-header {
+                background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+                color: white;
+                padding: 20px;
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+
+            /* Chart Container for Responsiveness */
+            .chart-container {
+                position: relative;
+                height: 0;
+                width: 100%;
+                padding-bottom: 60%;
+                /* Aspect Ratio */
+            }
+
+            /* Key Takeaways Section */
+            .key-takeaways {
+                background-color: #e8f5e9;
+                border-left: 5px solid #4CAF50;
+                padding: 15px 20px;
+                margin-top: 30px;
+                border-radius: 0 8px 8px 0;
+            }
+
+            .key-takeaways h3 {
+                margin-top: 0;
+                color: #2E7D32;
+            }
+
+            .key-takeaways ul {
+                margin-bottom: 0;
+                padding-left: 20px;
+            }
+
+            .key-takeaways li {
+                margin-bottom: 8px;
+            }
+
+            /* Production Process Section */
+            .process-section {
+                margin-top: 30px;
+            }
+
+            .process-steps {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin-top: 20px;
+            }
+
+            .step {
+                flex: 1 0 45%;
+                min-width: 250px;
+                margin-bottom: 20px;
+                padding: 15px;
+                background-color: #f1f8e9;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .step-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .step-number {
+                background-color: #4CAF50;
+                color: white;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-right: 10px;
+            }
+
+            .step-title {
+                font-weight: bold;
+                color: #2E7D32;
+                font-size: 18px;
+            }
+
+            /* Icons for Process Steps */
+            .icon-container {
+                width: 40px;
+                height: 40px;
+                margin-right: 15px;
+            }
+
+            /* Responsive Adjustments */
+            @media (max-width: 768px) {
+                .chart-container {
+                    padding-bottom: 80%;
+                    /* Increase aspect ratio on tablets */
+                }
+
+                .step {
+                    flex: 1 0 100%;
+                    /* Full width on smaller screens */
+                }
+
+                .card-header {
+                    font-size: 20px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .chart-container {
+                    padding-bottom: 100%;
+                    /* Further increase aspect ratio on mobile */
+                }
+
+                .card-header {
+                    font-size: 18px;
+                    padding: 15px;
+                }
+
+                .card-body {
+                    padding: 15px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">BioCNG (ก๊าซ CBG) เทียบกับเชื้อเพลิงฟอสซิล: การเปรียบเทียบการปล่อยก๊าซ</div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="emissionsChart"></canvas>
+                    </div>
+
+                    <div class="key-takeaways">
+                        <h3>ประเด็นสำคัญ</h3>
+                        <ul>
+                            <li>BioCNG (ก๊าซ CBG) ผลิตการปล่อยก๊าซที่ต่ำกว่าเชื้อเพลิงฟอสซิลอย่างมาก โดยลดลงได้ถึง 99.9% สำหรับสารมลพิษบางชนิด</li>
+                            <li>มีมีเทนสูงถึง 99.x% หลังจากการทำให้บริสุทธิ์ (เทียบกับ 55-60% ในก๊าซชีวภาพดิบ)</li>
+                            <li>บีบอัดที่ 200-250 บาร์ เพื่อการจัดเก็บและการขนส่งที่มีประสิทธิภาพ</li>
+                            <li>อุณหภูมิการจุดระเบิดที่สูงกว่า (600°C) ทำให้ BioCNG (ก๊าซ CBG) ปลอดภัยกว่าน้ำมันเบนซินและดีเซล</li>
+                            <li>BioCNG (ก๊าซ CBG) มีช่วงการติดไฟ 5-15% ทำให้ติดไฟได้น้อยกว่าและปลอดภัยกว่าเชื้อเพลิงแบบดั้งเดิมหลายชนิด</li>
+                            <li>ค่าออกเทนสูงส่งผลให้ประสิทธิภาพเชิงความร้อนของเครื่องยนต์ดีขึ้น</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">กระบวนการผลิต BioCNG (ก๊าซ CBG)</div>
+                <div class="card-body">
+                    <div class="process-steps">
+                        <div class="step">
+                            <div class="step-header">
+                                <div class="step-number">1</div>
+                                <div class="step-title">การรวบรวมวัตถุดิบ</div>
+                            </div>
+                            <div class="step-content">
+                                การรวบรวมของเสียทางการเกษตร ของเสียจากอาหาร ของเสียจากเทศบาล หรือมูลสัตว์ที่ใช้เป็นวัตถุดิบในการผลิตก๊าซชีวภาพ
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-header">
+                                <div class="step-number">2</div>
+                                <div class="step-title">การย่อยสลายแบบไม่ใช้ออกซิเจน</div>
+                            </div>
+                            <div class="step-content">
+                                จุลินทรีย์สลายสารอินทรีย์ในที่ที่ไม่มีออกซิเจนผ่านสี่ขั้นตอน: ไฮโดรไลซิส, แอซิโดเจเนซิส, อะซิโตเจเนซิส และมีเทนโนเจเนซิส โดยผลิตก๊าซชีวภาพที่มีมีเทน 55-60%
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-header">
+                                <div class="step-number">3</div>
+                                <div class="step-title">การทำให้ก๊าซชีวภาพบริสุทธิ์</div>
+                            </div>
+                            <div class="step-content">
+                                ก๊าซชีวภาพดิบผ่านการทำให้บริสุทธิ์โดยใช้เทคโนโลยีต่างๆ เช่น การขัดด้วยน้ำ การดูดซับแรงดันสวิง หรือการแยกเมมเบรน เพื่อกำจัด CO₂, H₂S และความชื้น
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-header">
+                                <div class="step-number">4</div>
+                                <div class="step-title">การบีบอัด</div>
+                            </div>
+                            <div class="step-content">
+                                ก๊าซชีวภาพบริสุทธิ์ (มีเทน 96-97%) ถูกบีบอัดที่ 200-250 บาร์ เพื่อผลิต BioCNG (ก๊าซ CBG) พร้อมใช้งานในยานพาหนะและการใช้งานอื่นๆ โดยมีการดัดแปลงโครงสร้างพื้นฐานที่มีอยู่น้อยที่สุด
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align:center; margin-top: 20px;">
+            <a href="https://www.pvegroup.asia/th/ผู้จัดหาและผู้จัดจำหน่าย-ก๊าซไบโอมีเทนอัด-BioCNG-ก๊าซCBG.html"
+                target="_blank" rel="dofollow">
+                เรียนรู้เพิ่มเติมเกี่ยวกับผู้จำหน่ายและจัดจำหน่าย BioCNG (ก๊าซ CBG) จาก โพรเว่อส์ เอนจิเนียริ่ง กรู้ป (โพรเว่อส์ฯ)
+            </a>
+        </p>
+
+        <script>
+            // Wait for the DOM to be fully loaded
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get the chart canvas element
+                const ctx = document.getElementById('emissionsChart').getContext('2d');
+
+                // Chart data - based on information from the document
+                // The document mentions reduced levels of carbon monoxide (0.02%), hydrocarbons (0.12%),
+                // nitrogen oxides (0.48%), and suspended particles (0.1%) compared to conventional fuels
+                const data = {
+                    labels: ['คาร์บอนมอนอกไซด์', 'ไฮโดรคาร์บอน', 'ไนโตรเจนออกไซด์', 'อนุภาคแขวนลอย'],
+                    datasets: [
+                        {
+                            label: 'BioCNG (ก๊าซ CBG) (% ของการปล่อยก๊าซ)',
+                            data: [0.02, 0.12, 0.48, 0.1],
+                            backgroundColor: 'rgba(76, 175, 80, 0.7)',
+                            borderColor: 'rgba(76, 175, 80, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'เชื้อเพลิงฟอสซิล (% ของการปล่อยก๊าซ)',
+                            data: [100, 100, 100, 100],
+                            backgroundColor: 'rgba(239, 83, 80, 0.7)',
+                            borderColor: 'rgba(239, 83, 80, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                };
+
+                // Chart configuration options
+                const options = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // Horizontal bar chart
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14
+                                },
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                display: true,
+                                drawBorder: true,
+                                drawOnChartArea: true
+                            },
+                            title: {
+                                display: true,
+                                text: 'การปล่อยก๊าซ (% เทียบกับเชื้อเพลิงฟอสซิล)'
+                            },
+                            ticks: {
+                                callback: function (value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                };
+
+                // Create and render the chart
+                const emissionsChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: options
+                });
+
+                // Function to handle responsiveness
+                function resizeChart() {
+                    emissionsChart.resize();
+                }
+
+                // Add event listener for window resize
+                window.addEventListener('resize', resizeChart);
+            });
+        </script>
+    </body>
+
+    </html>
+
+    <script>
+
+    </script>
+</body>
+
+</html>
